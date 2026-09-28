@@ -1,0 +1,32 @@
+name: Scraper Loteka
+
+on:
+  workflow_dispatch:
+
+jobs:
+  scrapear:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar dependencias
+        run: |
+          pip install playwright
+          playwright install --with-deps chromium
+
+      - name: Correr el scraper
+        run: python scraper.py
+
+      - name: Guardar resultados en el repositorio
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add resultados_loteka.json
+          git commit -m "Actualizar resultados de Loteka" || echo "Sin cambios"
+          git push
