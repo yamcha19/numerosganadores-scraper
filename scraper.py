@@ -12,7 +12,7 @@ from playwright.sync_api import sync_playwright
 URL_BASE = "https://www.conectate.com.do/loterias/loteka/quiniela-mega-decenas/"
 ARCHIVO_SALIDA = "resultados_loteka.json"
 
-FECHA_INICIO = date(2023, 1, 1)   # ajustar segun cuantos anos quieras traer
+FECHA_INICIO = date.today() - timedelta(days=10)   # ajustar segun cuantos anos quieras traer
 FECHA_FIN = date.today()
 
 
